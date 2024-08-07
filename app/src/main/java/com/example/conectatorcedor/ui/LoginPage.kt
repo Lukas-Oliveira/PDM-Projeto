@@ -28,6 +28,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.conectatorcedor.MainActivity
 import com.example.conectatorcedor.R
 import com.example.conectatorcedor.RegisterActivity
 
@@ -53,20 +54,21 @@ fun LoginPage(
         )
 
         Spacer(modifier = Modifier.height(50.dp))
-        OutlinedTextField(
+        DataField(
             value = email,
             onValueChange = { email = it },
-            label = { Text(text = "E-Mail") },
-            modifier = modifier.size(width = 325.dp, height = 50.dp)
+            label = "E-Mail",
+            modifier = modifier
         )
+
         Spacer(modifier = Modifier.height(30.dp))
-        OutlinedTextField(
+        PasswordField(
             value = password,
             onValueChange = { password = it },
-            label = { Text(text = "Senha") },
-            modifier = modifier.size(width = 325.dp, height = 50.dp),
-            visualTransformation = PasswordVisualTransformation()
+            label = "Senha",
+            modifier = modifier
         )
+
         Spacer(modifier = Modifier.height(40.dp))
         Button(
             onClick = {},
