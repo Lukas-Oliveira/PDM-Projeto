@@ -71,7 +71,11 @@ fun LoginPage(
 
         Spacer(modifier = Modifier.height(40.dp))
         Button(
-            onClick = {},
+            onClick = {
+                activity?.startActivity(
+                    Intent(activity, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                )
+            },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1A8FDD)),
             modifier = modifier.size(width = 175.dp, height = 40.dp)
         ) {
