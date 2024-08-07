@@ -1,6 +1,7 @@
 package com.example.conectatorcedor.ui
 
 import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -73,7 +74,10 @@ fun RegisterPage(
         Spacer(modifier = modifier.height(50.dp))
 
         Button(
-            onClick  = {},
+            onClick  = {
+                Toast.makeText(activity, "Registrado!", Toast.LENGTH_LONG).show()
+                activity?.finish()
+            },
             colors   = ButtonDefaults.buttonColors(containerColor = Color(0xFF1A8FDD)),
             modifier = modifier.size(width = 175.dp, height = 40.dp),
             enabled  = name.isNotEmpty()                 &&
