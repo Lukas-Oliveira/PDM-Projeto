@@ -1,6 +1,8 @@
 package com.example.conectatorcedor
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -39,7 +41,6 @@ class MainActivity : ComponentActivity() {
         setContent {
 
             val navController = rememberNavController()
-            var showDialog by remember { mutableStateOf(value = false) }
             val context = LocalContext.current
             val currentRoute = navController.currentBackStackEntryAsState()
             val showButton = currentRoute.value?.destination?.route == BottomNavItem.HomePage.route
@@ -49,6 +50,8 @@ class MainActivity : ComponentActivity() {
                 onResult = {}
             )
 
+            var activity = LocalContext.current as? Activity
+
             ConectaTorcedorTheme {
                 Scaffold(
                     bottomBar = {
@@ -57,7 +60,11 @@ class MainActivity : ComponentActivity() {
                     floatingActionButton = {
                         if (showButton) {
                             FloatingActionButton(
-                                onClick = { showDialog = true },
+                                onClick = {
+                                    activity?.startActivity(
+                                        Intent(activity, IssueAlertActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                                    )
+                                },
                             ) {
                                 Icon(imageVector = Icons.Default.Add, contentDescription = "Adicionar")
                             }
