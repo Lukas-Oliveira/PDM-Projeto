@@ -19,7 +19,7 @@ fun MainNavHost(
 ) {
     NavHost(navController, startDestination = BottomNavItem.HomePage.route) {
         composable(route = BottomNavItem.FavoritesPage.route) {
-            FavoritesPage(viewModel = viewModel, context = context)
+            FavoritesPage(viewModel = viewModel)
         }
         composable(route = BottomNavItem.HomePage.route) {
             HomePage(viewModel = viewModel, context = context)
