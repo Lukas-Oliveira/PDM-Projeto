@@ -29,6 +29,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.conectatorcedor.R
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
@@ -75,8 +77,15 @@ fun RegisterPage(
 
         Button(
             onClick  = {
-                Toast.makeText(activity, "Registrado!", Toast.LENGTH_LONG).show()
-                activity?.finish()
+                Firebase.auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(activity!!) { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(activity, "Registrado!", Toast.LENGTH_LONG).show()
+                            activity.finish()
+                        } else {
+                            Toast.makeText(activity, "Registro Falhou!", Toast.LENGTH_LONG).show()
+                        }
+                    }
             },
             colors   = ButtonDefaults.buttonColors(containerColor = Color(0xFF1A8FDD)),
             modifier = modifier.size(width = 175.dp, height = 40.dp),

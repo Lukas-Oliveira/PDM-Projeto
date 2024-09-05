@@ -2,6 +2,7 @@ package com.example.conectatorcedor.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -31,6 +32,8 @@ import androidx.compose.ui.unit.dp
 import com.example.conectatorcedor.MainActivity
 import com.example.conectatorcedor.R
 import com.example.conectatorcedor.RegisterActivity
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
@@ -72,9 +75,15 @@ fun LoginPage(
         Spacer(modifier = Modifier.height(40.dp))
         Button(
             onClick = {
-                activity?.startActivity(
-                    Intent(activity, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                )
+                Firebase.auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(activity!!) { task ->
+                        if (task.isSuccessful) {
+                            activity.startActivity(Intent(activity, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+                            Toast.makeText(activity, "Logado!", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(activity, "O Login Falhou!", Toast.LENGTH_LONG).show()
+                        }
+                    }
             },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1A8FDD)),
             modifier = modifier.size(width = 175.dp, height = 40.dp)

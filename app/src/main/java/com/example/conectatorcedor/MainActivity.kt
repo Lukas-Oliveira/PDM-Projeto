@@ -31,6 +31,8 @@ import com.example.conectatorcedor.ui.nav.BottomNavBar
 import com.example.conectatorcedor.ui.nav.BottomNavItem
 import com.example.conectatorcedor.ui.nav.MainNavHost
 import com.example.conectatorcedor.ui.theme.ConectaTorcedorTheme
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,9 +63,7 @@ class MainActivity : ComponentActivity() {
                         if (showButton) {
                             FloatingActionButton(
                                 onClick = {
-                                    activity?.startActivity(
-                                        Intent(activity, IssueAlertActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                                    )
+                                    this.finish()
                                 },
                             ) {
                                 Icon(imageVector = Icons.Default.Add, contentDescription = "Adicionar")
